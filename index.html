@@ -3,138 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard with Top and Side Menu</title>
     <style>
         body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
         }
-        /* Style sidebar */
+
+        /* Styling for sidebar */
         .sidebar {
             height: 100vh;
             width: 200px;
+            background-color: #2c3e50;
+            padding-top: 20px;
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #333;
-            padding-top: 20px;
-            color: white;
+            display: flex;
+            flex-direction: column;
         }
+
         .sidebar a {
-            padding: 10px 15px;
+            padding: 15px;
             text-decoration: none;
-            font-size: 18px;
             color: white;
-            display: block;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
+
         .sidebar a:hover {
-            background-color: #575757;
+            background-color: #34495e;
         }
-        /* Style content */
+
+        .sidebar a.active {
+            background-color: #e67e22;
+        }
+
+        /* Navbar top styling */
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(100% - 200px);
+            position: fixed;
+            top: 0;
+            left: 200px;
+        }
+
+        .navbar-logo {
+            color: white;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        .navbar-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar-menu li {
+            margin-left: 20px;
+        }
+
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            padding: 10px 15px;
+        }
+
+        .navbar-menu a:hover {
+            background-color: #34495e;
+            border-radius: 5px;
+        }
+
+        .navbar-menu a.active {
+            background-color: #e67e22;
+            border-radius: 5px;
+        }
+
+        /* Content area */
         .content {
+            margin-top: 70px;
             margin-left: 200px;
             padding: 20px;
+            width: calc(100% - 200px);
         }
-        .header {
-            padding: 10px;
-            background-color: #4287f5;
-            color: white;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .stat-cards {
-            display: flex;
-            gap: 20px;
-            justify-content: space-around;
-        }
-        .card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 30%;
-            text-align: center;
-        }
-        .card h3 {
-            margin: 10px 0;
-            font-size: 24px;
-        }
-        .chart {
-            margin-top: 30px;
-            text-align: center;
-        }
-        canvas {
-            width: 100%;
-            max-width: 600px;
+
+        /* Responsive sidebar */
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .navbar {
+                width: 100%;
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                margin-top: 150px;
+            }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- Sidebar -->
+    <!-- Sidebar on the left -->
     <div class="sidebar">
-        <a href="#">Home</a>
-        <a href="#">Analytics</a>
-        <a href="#">Reports</a>
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Profile</a>
+        <a href="#">Messages</a>
         <a href="#">Settings</a>
+        <a href="#">Help</a>
         <a href="#">Logout</a>
     </div>
 
-    <!-- Content area -->
+    <!-- Navbar at the top -->
+    <nav class="navbar">
+        <div class="navbar-logo">BrandLogo</div>
+        <ul class="navbar-menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main content -->
     <div class="content">
-        <div class="header">
-            <h2>Welcome to Your Dashboard</h2>
-        </div>
-
-        <!-- Statistic cards -->
-        <div class="stat-cards">
-            <div class="card">
-                <h3>Users</h3>
-                <p>1,230</p>
-            </div>
-            <div class="card">
-                <h3>Sales</h3>
-                <p>$7,500</p>
-            </div>
-            <div class="card">
-                <h3>Feedback</h3>
-                <p>320</p>
-            </div>
-        </div>
-
-        <!-- Chart section -->
-        <div class="chart">
-            <h3>Sales Overview</h3>
-            <canvas id="myChart"></canvas>
-        </div>
+        <h1>Welcome to the Dashboard</h1>
+        <p>This dashboard layout features both a top menu and a sidebar for more complex navigation options.</p>
+        <p>You can add widgets, stats, charts, and other elements in this main content area.</p>
     </div>
-
-    <!-- Script to generate chart -->
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                datasets: [{
-                    label: 'Sales',
-                    data: [1200, 1900, 3000, 5000, 2400, 3200],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
 
 </body>
 </html>
