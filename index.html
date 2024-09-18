@@ -1,1 +1,140 @@
-<h1>selamat datang tim </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        /* Style sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+            color: white;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        /* Style content */
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+        .header {
+            padding: 10px;
+            background-color: #4287f5;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .stat-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 30%;
+            text-align: center;
+        }
+        .card h3 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
+        .chart {
+            margin-top: 30px;
+            text-align: center;
+        }
+        canvas {
+            width: 100%;
+            max-width: 600px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#">Home</a>
+        <a href="#">Analytics</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+    </div>
+
+    <!-- Content area -->
+    <div class="content">
+        <div class="header">
+            <h2>Welcome to Your Dashboard</h2>
+        </div>
+
+        <!-- Statistic cards -->
+        <div class="stat-cards">
+            <div class="card">
+                <h3>Users</h3>
+                <p>1,230</p>
+            </div>
+            <div class="card">
+                <h3>Sales</h3>
+                <p>$7,500</p>
+            </div>
+            <div class="card">
+                <h3>Feedback</h3>
+                <p>320</p>
+            </div>
+        </div>
+
+        <!-- Chart section -->
+        <div class="chart">
+            <h3>Sales Overview</h3>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Script to generate chart -->
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [1200, 1900, 3000, 5000, 2400, 3200],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
